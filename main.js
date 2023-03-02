@@ -73,6 +73,10 @@ function addStar() {
 
 Array(200).fill().forEach(addStar);
 
+// our background
+const spaceTexture = new THREE.TextureLoader().load("/assets/space.jpg");
+scene.background = spaceTexture;
+
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
   requestAnimationFrame(animate);
