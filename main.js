@@ -29,15 +29,26 @@ const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 
 // material - like the wrapping paper for an object
 // most material will require a light source to bounce off of but we'll go with the basic option that won't req a light source
-const material = new THREE.MeshBasicMaterial({
-  color: 0xff6347,
-  wireframe: true,
-});
+// const material = new THREE.MeshBasicMaterial({
+//   color: 0xff6347,
+//   wireframe: true,
+// });
+
+// MeshStandardMaterial is a material that will react to light boucing off of it
+const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 
 // our object/shape
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
+
+// point light will emits a light in all directions
+const pointLight = new THREE.PointLight(0xffffff);
+pointLight.position.set(5,5,5); // lights up the middle of the torus
+
+const ambientLight = new THREE.AmbientLight(0xffffff); // like a flood light that'll light up everything in the scene
+
+scene.add(pointLight, ambientLight);
 
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
