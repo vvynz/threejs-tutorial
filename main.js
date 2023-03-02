@@ -34,8 +34,22 @@ const material = new THREE.MeshBasicMaterial({
   wireframe: true,
 });
 
+// our object/shape
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
 
-renderer.render(scene, camera);
+// a recursive function that while create an endless loop that calls the rendering function automatically
+function animate() {
+  requestAnimationFrame(animate);
+
+  // when we change the shape/obj's properties in the loop, the shape will animate
+  // ex. we want to rotate the shape on the x axis by 0.01 sec per animation frame
+  torus.rotation.x += 0.01;
+  torus.rotation.y += 0.005;
+  torus.rotation.z += 0.01;
+
+  renderer.render(scene, camera);
+}
+
+animate();
