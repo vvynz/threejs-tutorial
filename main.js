@@ -1,6 +1,7 @@
 import "./style.css";
 
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 // scene is like a container that holds all your objects, cameras and lights
 const scene = new THREE.Scene();
@@ -53,6 +54,8 @@ const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper); // will show a little wireframe that shows the position & direction of light source
 
+// will listen to dom events on the mouse and update accordingly 
+const controls = new OrbitControls(camera, renderer.domElement);
 
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
@@ -64,6 +67,8 @@ function animate() {
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
 
+  controls.update();
+  
   renderer.render(scene, camera);
 }
 
