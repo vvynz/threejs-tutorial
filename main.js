@@ -47,8 +47,12 @@ const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(5,5,5); // lights up the middle of the torus
 
 const ambientLight = new THREE.AmbientLight(0xffffff); // like a flood light that'll light up everything in the scene
-
 scene.add(pointLight, ambientLight);
+
+const lightHelper = new THREE.PointLightHelper(pointLight);
+const gridHelper = new THREE.GridHelper(200, 50);
+scene.add(lightHelper, gridHelper); // will show a little wireframe that shows the position & direction of light source
+
 
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
