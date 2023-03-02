@@ -45,7 +45,7 @@ scene.add(torus);
 
 // point light will emits a light in all directions
 const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5,5,5); // lights up the middle of the torus
+pointLight.position.set(5, 5, 5); // lights up the middle of the torus
 
 const ambientLight = new THREE.AmbientLight(0xffffff); // like a flood light that'll light up everything in the scene
 scene.add(pointLight, ambientLight);
@@ -54,8 +54,24 @@ const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper); // will show a little wireframe that shows the position & direction of light source
 
-// will listen to dom events on the mouse and update accordingly 
+// will listen to dom events on the mouse and update accordingly
 const controls = new OrbitControls(camera, renderer.domElement);
+
+// will generate a random num of stars
+function addStar() {
+  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+  const star = new THREE.Mesh(geometry, material);
+
+  const [x, y, z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(100));
+
+    star.position.set(x, y, z);
+    scene.add(star)
+}
+
+Array(200).fill().forEach(addStar);
 
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
@@ -68,7 +84,7 @@ function animate() {
   torus.rotation.z += 0.01;
 
   controls.update();
-  
+
   renderer.render(scene, camera);
 }
 
