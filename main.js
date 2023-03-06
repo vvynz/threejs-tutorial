@@ -77,6 +77,12 @@ Array(200).fill().forEach(addStar);
 const spaceTexture = new THREE.TextureLoader().load("/assets/space.jpg");
 scene.background = spaceTexture;
 
+function moveCamera() {
+
+}
+
+document.body.onscroll = moveCamera();
+
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
   requestAnimationFrame(animate);
@@ -108,3 +114,6 @@ const moon = new THREE.Mesh(
 )
 
 scene.add(moon);
+
+moon.position.z = 30;
+moon.position.setX(-10);
