@@ -6,4 +6,34 @@ canvas {
 
 main {
   position: absolute;
+  width: 100vw;
+  color: white;
+  z-index: 99;
+  width: 100%;
+  margin: 0 auto;
+  padding: 120px 0;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+header {
+  grid-column: 2 / span 5;
+  font-size: 2.5rem;
+  padding: 2rem;
+}
+
+section {
+  grid-column: 2/ 8;
+  font-size: 1.5rem;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+  grid-column: 2/ span 9;
+}
+
+blockquote p {
+  font-size: 4rem;
 }
