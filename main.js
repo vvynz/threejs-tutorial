@@ -67,8 +67,8 @@ function addStar() {
     .fill()
     .map(() => THREE.MathUtils.randFloatSpread(100));
 
-    star.position.set(x, y, z);
-    scene.add(star)
+  star.position.set(x, y, z);
+  scene.add(star);
 }
 
 Array(200).fill().forEach(addStar);
@@ -76,12 +76,6 @@ Array(200).fill().forEach(addStar);
 // our background
 const spaceTexture = new THREE.TextureLoader().load("/assets/space.jpg");
 scene.background = spaceTexture;
-
-function moveCamera() {
-
-}
-
-document.body.onscroll = moveCamera();
 
 // a recursive function that while create an endless loop that calls the rendering function automatically
 function animate() {
@@ -109,11 +103,27 @@ const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
   new THREE.MeshStandardMaterial({
     map: moonTexture,
-    normalMap: normalTexture
+    normalMap: normalTexture,
   })
-)
+);
 
 scene.add(moon);
 
 moon.position.z = 30;
 moon.position.setX(-10);
+
+function moveCamera() {
+  // find how far the user has scrolled from the top
+  // gives the dimensions of the viewport & how far from the top of the webpage
+  const t = document.body.getBoundingClientRect().top;
+
+  moon.rotation.x += 0.05;
+  moon.rotation.y += 0.075;
+  moon.rotation.z += 0.05;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.position.y = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera;
